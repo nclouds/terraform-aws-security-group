@@ -26,6 +26,15 @@ resource "aws_security_group_rule" "default_ingress_rules" {
   type              = "ingress"
 }
 
+resource "aws_security_group_rule" "self" {
+  security_group_id = aws_security_group.default.id
+  from_port         = 0
+  protocol          = "all"
+  to_port           = 65535
+  self              = true
+  type              = "ingress"
+}
+
 resource "aws_security_group_rule" "default_egress_rules" {
   count             = length(var.egress_rule_list)
 
