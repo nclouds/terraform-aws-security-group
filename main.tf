@@ -28,6 +28,7 @@ resource "aws_security_group_rule" "default_ingress_rules" {
 
 resource "aws_security_group_rule" "self" {
   security_group_id = aws_security_group.default.id
+  description       = "Managed by terraform"
   from_port         = 0
   protocol          = "all"
   to_port           = 65535
