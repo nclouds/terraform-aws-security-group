@@ -1,6 +1,75 @@
-# terraform-aws-security-group
+# AWS Security Group (SG) Terraform Module
 
-Terraform Module to create an AWS Security Group.
+Terraform module to provision [`AWS VPC Security Group`](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) on AWS.
+
+## Usage
+
+### Simple setup
+
+Create a simple security group with default rules.
+```hcl
+    module "security_group" {
+        source     = "git@github.com:nclouds/terraform-aws-security-group.git?ref=v0.1.0"
+        identifier = "example-sg"
+        vpc_id     = "vpc-xxxxxxxxxxxxx"
+        tags       = {
+            Owner       = "sysops"
+            env         = "dev"
+            Cost_Center = "XYZ"
+        }
+    }
+```
+
+For more details on a working example, please visit [`examples/simple`](examples/simple)
+
+### Advanced Setup
+If you want to create security group with custom rules, you can use the module like this:
+
+```hcl
+    module "security_group" {
+        source     = "git@github.com:nclouds/terraform-aws-security-group.git?ref=v0.1.0"
+        identifier = "example-sg"
+        vpc_id     = "vpc-xxxxxxxxxxxxx"
+        ingress_rule_list = [
+            {
+            cidr_blocks = ["0.0.0.0/0"],
+            description = "HTTPS inbound",
+            from_port   = 443,
+            protocol    = "tcp",
+            to_port     = 443
+            },
+            {
+            cidr_blocks = ["0.0.0.0/0"],
+            description = "HTTP inbound",
+            from_port   = 80,
+            protocol    = "tcp",
+            to_port     = 80
+        }]
+        egress_rule_list = [{
+            cidr_blocks = ["0.0.0.0/0"],
+            description = "HTTPS outbound",
+            from_port   = 443,
+            protocol    = "tcp",
+            to_port     = 443
+            },
+            {
+            cidr_blocks = ["0.0.0.0/0"],
+            description = "HTTP outbound",
+            from_port   = 80,
+            protocol    = "tcp",
+            to_port     = 80
+            }
+        ]
+        tags = var.tags
+    }
+```
+
+For more options refer to a working example at [`examples/advanced`](examples/advanced)
+
+## Examples
+Here are some working examples of using this module:
+- [`examples/simple`](examples/simple)
+- [`examples/advanced`](examples/advanced)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -14,6 +83,17 @@ Terraform Module to create an AWS Security Group.
 | Name | Version |
 |------|---------|
 | aws | n/a |
+
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) |
+| [aws_security_group_rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) |
 
 ## Inputs
 
@@ -31,7 +111,6 @@ Terraform Module to create an AWS Security Group.
 | Name | Description |
 |------|-------------|
 | output | n/a |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Contributing
