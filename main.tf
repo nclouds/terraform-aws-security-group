@@ -27,7 +27,7 @@ resource "aws_security_group_rule" "default_ingress_rules" {
 }
 
 resource "aws_security_group_rule" "self" {
-  count             = var.self_rule ? 1 : 0
+  count = var.self_rule ? 1 : 0
   security_group_id = aws_security_group.default.id
   description       = "Managed by terraform"
   from_port         = 0
