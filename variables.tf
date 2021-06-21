@@ -51,3 +51,10 @@ variable "tags" {
   default     = {}
   type        = map
 }
+
+variable "self_rule" {
+  description = "self rule is coditional"
+  type        =  bool
+  default     =  false
+
+}
