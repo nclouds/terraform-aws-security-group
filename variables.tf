@@ -54,7 +54,8 @@ variable "tags" {
 
 variable "self_rule" {
   description = "Set to 'true' to create a self ingress rule in the security group"
-  type        =  bool
   default     =  false
+  type        =  bool
+  
 
 }
