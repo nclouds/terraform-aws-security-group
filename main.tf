@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "default_ingress_rules" {
 
   security_group_id = aws_security_group.default.id
   cidr_blocks       = var.ingress_rule_list[count.index].cidr_blocks
-  description       = var.ingress_rule_list[count.index].description
+  description       = var.ingress_rule_list[count.index].description #tfsec:ignore:AWS018
   from_port         = var.ingress_rule_list[count.index].from_port
   protocol          = var.ingress_rule_list[count.index].protocol
   to_port           = var.ingress_rule_list[count.index].to_port
@@ -27,6 +27,8 @@ resource "aws_security_group_rule" "default_ingress_rules" {
 }
 
 resource "aws_security_group_rule" "self" {
+  count = var.self_rule ? 1 : 0
+
   security_group_id = aws_security_group.default.id
   description       = "Managed by terraform"
   from_port         = 0
@@ -41,7 +43,7 @@ resource "aws_security_group_rule" "default_egress_rules" {
 
   security_group_id = aws_security_group.default.id
   cidr_blocks       = var.egress_rule_list[count.index].cidr_blocks
-  description       = var.egress_rule_list[count.index].description
+  description       = var.egress_rule_list[count.index].description #tfsec:ignore:AWS018
   from_port         = var.egress_rule_list[count.index].from_port
   protocol          = var.egress_rule_list[count.index].protocol
   to_port           = var.egress_rule_list[count.index].to_port
