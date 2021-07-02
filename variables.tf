@@ -54,8 +54,12 @@ variable "tags" {
 
 variable "self_rule" {
   description = "Set to 'true' to create a self ingress rule in the security group"
-  default     =  false
-  type        =  bool
-  
+  default     = false
+  type        = bool
+}
 
+variable "append_workspace" {
+  description = "Appends the terraform workspace at the end of resource names, <identifier>-<worspace>"
+  default     = true
+  type        = bool
 }

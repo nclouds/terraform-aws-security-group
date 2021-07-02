@@ -9,7 +9,8 @@ Terraform module to provision [`AWS VPC Security Group`](https://docs.aws.amazon
 Create a simple security group with default rules.
 ```hcl
     module "security_group" {
-        source     = "git@github.com:nclouds/terraform-aws-security-group.git?ref=v0.1.1"
+        source       = "app.terraform.io/ncodelibrary/security-group/aws"
+        version      = "0.1.1"
         identifier = "example-sg"
         vpc_id     = "vpc-xxxxxxxxxxxxx"
         tags       = {
@@ -27,7 +28,8 @@ If you want to create security group with custom rules, you can use the module l
 
 ```hcl
     module "security_group" {
-        source     = "git@github.com:nclouds/terraform-aws-security-group.git?ref=v0.1.1"
+        source       = "app.terraform.io/ncodelibrary/security-group/aws"
+        version      = "0.1.1"
         identifier = "example-sg"
         vpc_id     = "vpc-xxxxxxxxxxxxx"
         ingress_rule_list = [
@@ -99,10 +101,12 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| append\_workspace | Appends the terraform workspace at the end of resource names, <identifier>-<worspace> | `bool` | `true` | no |
 | description | A description for the security group | `string` | `"Security group created by terraform"` | no |
 | egress\_rule\_list | List of security group egress rules | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "description": "Default egress rule",<br>    "from_port": 0,<br>    "protocol": "all",<br>    "to_port": 65535<br>  }<br>]</pre> | no |
 | identifier | The name of the security group | `string` | n/a | yes |
 | ingress\_rule\_list | List of security group ingress rules | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | `[]` | no |
+| self\_rule | Set to 'true' to create a self ingress rule in the security group | `bool` | `false` | no |
 | tags | Tags to be applied to the resource | `map` | `{}` | no |
 | vpc\_id | The id of the VPC where the security group is being deployed | `string` | n/a | yes |
 
