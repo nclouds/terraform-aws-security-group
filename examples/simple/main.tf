@@ -1,7 +1,8 @@
 # Create a VPC
 module "vpc" {
   count        = var.create_vpc ? 1 : 0
-  source       = "git@github.com:nclouds/terraform-aws-vpc.git?ref=v0.1.0"
+  source       = "app.terraform.io/ncodelibrary/vpc/aws"
+  version      = "0.1.3"
   multi_nat_gw = false
   vpc_settings = {
     application_subnets = ["10.10.16.0/22", "10.10.20.0/22"]
@@ -12,12 +13,9 @@ module "vpc" {
     tenancy             = "default"
     cidr                = "10.10.0.0/16"
   }
-  identifier = "${var.identifier}_vpc"
+  identifier = var.identifier
   region     = "us-east-1"
-  tags = {
-    Owner = "sysops"
-    env   = "dev"
-  }
+  tags       = var.tags
 }
 
 # Create a Security Group

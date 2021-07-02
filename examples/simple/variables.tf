@@ -1,6 +1,6 @@
 variable "create_vpc" {
   description = "Create a new VPC"
-  default     = false
+  default     = true
   type        = bool
 }
 

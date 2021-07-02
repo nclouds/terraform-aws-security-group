@@ -1,7 +1,8 @@
 locals {
+  identifier = var.append_workspace ? "${var.identifier}-${terraform.workspace}" : var.identifier
   default_tags = {
     Environment = terraform.workspace
-    Name        = "${var.identifier}-${terraform.workspace}"
+    Name        = local.identifier
   }
   tags = merge(local.default_tags, var.tags)
 }
@@ -9,7 +10,7 @@ locals {
 resource "aws_security_group" "default" {
   description = var.description
   vpc_id      = var.vpc_id
-  name        = "${var.identifier}-${terraform.workspace}"
+  name        = local.identifier
 
   tags = local.tags
 }
