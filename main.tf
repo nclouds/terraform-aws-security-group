@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "default_egress_rules" {
   count = length(var.egress_rule_list)
 
   security_group_id = aws_security_group.default.id
-  cidr_blocks       = var.egress_rule_list[count.index].cidr_blocks
+  cidr_blocks       = var.egress_rule_list[count.index].cidr_blocks #tfsec:ignore:AWS007
   description       = var.egress_rule_list[count.index].description #tfsec:ignore:AWS018
   from_port         = var.egress_rule_list[count.index].from_port
   protocol          = var.egress_rule_list[count.index].protocol
