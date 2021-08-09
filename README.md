@@ -10,7 +10,7 @@ Create a simple security group with default rules.
 ```hcl
     module "security_group" {
         source       = "app.terraform.io/ncodelibrary/security-group/aws"
-        version      = "0.1.1"
+        version      = "0.1.2"
         identifier = "example-sg"
         vpc_id     = "vpc-xxxxxxxxxxxxx"
         tags       = {
@@ -29,7 +29,7 @@ If you want to create security group with custom rules, you can use the module l
 ```hcl
     module "security_group" {
         source       = "app.terraform.io/ncodelibrary/security-group/aws"
-        version      = "0.1.1"
+        version      = "0.1.2"
         identifier = "example-sg"
         vpc_id     = "vpc-xxxxxxxxxxxxx"
         ingress_rule_list = [
