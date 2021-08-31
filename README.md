@@ -107,7 +107,7 @@ No Modules.
 | identifier | The name of the security group | `string` | n/a | yes |
 | ingress\_rule\_list | List of security group ingress rules | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | `[]` | no |
 | self\_rule | Set to 'true' to create a self ingress rule in the security group | `bool` | `false` | no |
-| tags | Tags to be applied to the resource | `map` | `{}` | no |
+| tags | Tags to be applied to the resource | `map(any)` | `{}` | no |
 | vpc\_id | The id of the VPC where the security group is being deployed | `string` | n/a | yes |
 
 ## Outputs
