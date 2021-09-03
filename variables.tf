@@ -30,11 +30,11 @@ variable "ingress_from_security_group_list" {
   description = "List of security group ingress rules that specify another Security Group rather than a CIDR"
   default     = []
   type = list(object({
-    source_security_group_ids = string,
-    description               = string,
-    from_port                 = number,
-    protocol                  = string,
-    to_port                   = number
+    source_security_group_id = string,
+    description              = string,
+    from_port                = number,
+    protocol                 = string,
+    to_port                  = number
   }))
 }
 
