@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+<a name="v0.2.0"></a>
+## [v0.2.0] - 2021-09-03
+FEATURES:
+- Run Examples in Actions ([#9](https://github.com/nclouds/terraform-aws-security-group/issues/9))
+
+
 <a name="v0.1.2"></a>
 ## [v0.1.2] - 2021-08-10
 DOCS:
@@ -29,6 +35,7 @@ DOCS:
 - adding base documentation
 
 
-[Unreleased]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.0...HEAD
+[v0.2.0]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.1.0...v0.1.1
