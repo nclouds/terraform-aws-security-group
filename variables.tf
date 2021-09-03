@@ -15,7 +15,7 @@ variable "vpc_id" {
 }
 
 variable "ingress_rule_list" {
-  description = "List of security group ingress rules"
+  description = "List of security group ingress rules with a CIDR specified"
   default     = []
   type = list(object({
     cidr_blocks = list(string),
@@ -23,6 +23,18 @@ variable "ingress_rule_list" {
     from_port   = number,
     protocol    = string,
     to_port     = number
+  }))
+}
+
+variable "ingress_from_security_group_list" {
+  description = "List of security group ingress rules that specify another Security Group rather than a CIDR"
+  default     = []
+  type = list(object({
+    source_security_group_ids = string,
+    description               = string,
+    from_port                 = number,
+    protocol                  = string,
+    to_port                   = number
   }))
 }
 

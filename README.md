@@ -78,43 +78,47 @@ Here are some working examples of using this module:
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
-No Modules.
+No modules.
 
 ## Resources
 
-| Name |
-|------|
-| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) |
-| [aws_security_group_rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) |
+| Name | Type |
+|------|------|
+| [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group_rule.default_egress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.default_ingress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.default_security_group_ingress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.self](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| append\_workspace | Appends the terraform workspace at the end of resource names, <identifier>-<worspace> | `bool` | `true` | no |
-| description | A description for the security group | `string` | `"Security group created by terraform"` | no |
-| egress\_rule\_list | List of security group egress rules | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "description": "Default egress rule",<br>    "from_port": 0,<br>    "protocol": "all",<br>    "to_port": 65535<br>  }<br>]</pre> | no |
-| identifier | The name of the security group | `string` | n/a | yes |
-| ingress\_rule\_list | List of security group ingress rules | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | `[]` | no |
-| self\_rule | Set to 'true' to create a self ingress rule in the security group | `bool` | `false` | no |
-| tags | Tags to be applied to the resource | `map(any)` | `{}` | no |
-| vpc\_id | The id of the VPC where the security group is being deployed | `string` | n/a | yes |
+| <a name="input_append_workspace"></a> [append\_workspace](#input\_append\_workspace) | Appends the terraform workspace at the end of resource names, <identifier>-<worspace> | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | A description for the security group | `string` | `"Security group created by terraform"` | no |
+| <a name="input_egress_rule_list"></a> [egress\_rule\_list](#input\_egress\_rule\_list) | List of security group egress rules | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "description": "Default egress rule",<br>    "from_port": 0,<br>    "protocol": "all",<br>    "to_port": 65535<br>  }<br>]</pre> | no |
+| <a name="input_identifier"></a> [identifier](#input\_identifier) | The name of the security group | `string` | n/a | yes |
+| <a name="input_ingress_from_security_group_list"></a> [ingress\_from\_security\_group\_list](#input\_ingress\_from\_security\_group\_list) | List of security group ingress rules that specify another Security Group rather than a CIDR | <pre>list(object({<br>    source_security_group_ids = string,<br>    description               = string,<br>    from_port                 = number,<br>    protocol                  = string,<br>    to_port                   = number<br>  }))</pre> | `[]` | no |
+| <a name="input_ingress_rule_list"></a> [ingress\_rule\_list](#input\_ingress\_rule\_list) | List of security group ingress rules with a CIDR specified | <pre>list(object({<br>    cidr_blocks = list(string),<br>    description = string,<br>    from_port   = number,<br>    protocol    = string,<br>    to_port     = number<br>  }))</pre> | `[]` | no |
+| <a name="input_self_rule"></a> [self\_rule](#input\_self\_rule) | Set to 'true' to create a self ingress rule in the security group | `bool` | `false` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to the resource | `map(any)` | `{}` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the VPC where the security group is being deployed | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| output | n/a |
+| <a name="output_output"></a> [output](#output\_output) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Contributing
