@@ -1,9 +1,8 @@
 # Create a VPC
 module "vpc" {
-  count = var.create_vpc ? 1 : 0
-  // source       = "app.terraform.io/ncodelibrary/vpc/aws"
-  // version      = "0.1.3"
-  source       = "git@github.com:nclouds/terraform-aws-vpc.git?ref=feature/aws-provider-4.x"
+  count        = var.create_vpc ? 1 : 0
+  source       = "app.terraform.io/ncodelibrary/vpc/aws"
+  version      = "0.3.0"
   multi_nat_gw = false
   vpc_settings = {
     application_subnets = ["10.10.16.0/22", "10.10.20.0/22"]
