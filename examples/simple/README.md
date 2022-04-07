@@ -1,4 +1,4 @@
-[SourceCode](https://github.com/nclouds/terraform-aws-security-group/tree/v0.1.2/examples/simple)   
+[SourceCode](https://github.com/nclouds/terraform-aws-security-group/tree/v0.2.2/examples/simple)   
 [Report an Issue](https://github.com/nclouds/terraform-aws-security-group/issues)
 
 # Simple Security Group example
