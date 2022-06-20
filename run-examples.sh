@@ -12,15 +12,16 @@ terraform_plan () {
     pwd
     terraform init 
     terraform validate -no-color
-    terraform plan
+    terraform plan -out plan.out 
+    terraform show -json plan.out 2>&1 | tee $BASEDIR/tfplan.json
     popd
 }
 
 run_examples () {
-    if [ -d examples ]
+    if [[ -d examples ]]
         then 
         EXAMPLES=$(find ./examples -mindepth 1 -maxdepth 1 -type d -exec echo {} \;)
-        if [ -z $EXAMPLES ]
+        if [[ -z $EXAMPLES ]]
             then 
             terraform_plan ./examples
         else
