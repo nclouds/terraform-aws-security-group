@@ -8,11 +8,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+<a name="v0.2.4"></a>
+## [v0.2.4] - 2022-07-15
+FEATURES:
+- Enable Slack Notifications
+
+
 <a name="v0.2.3"></a>
-## [v0.2.3] - 2022-06-21
+## [v0.2.3] - 2022-07-02
 FEATURES:
 - Enable nClouds PreCommit Hook
-- Enable OPA Checks
 
 
 <a name="v0.2.2"></a>
@@ -57,7 +62,8 @@ DOCS:
 - adding base documentation
 
 
-[Unreleased]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.4...HEAD
+[v0.2.4]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.3...v0.2.4
 [v0.2.3]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.2...v0.2.3
 [v0.2.2]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.1...v0.2.2
 [v0.2.1]: https://github.com/nclouds/terraform-aws-security-group/compare/v0.2.0...v0.2.1
