@@ -46,7 +46,6 @@ module "flow_logs_role" {
 
 # Create a VPC
 module "vpc" {
-  count        = var.create_vpc ? 1 : 0
   source       = "git@github.com:nclouds/terraform-aws-vpc.git?ref=v0.3.0"
   multi_nat_gw = false
   flow_log_settings = {
@@ -76,6 +75,5 @@ module "vpc" {
 module "security_group" {
   source     = "../.."
   identifier = "${var.identifier}-sg"
-  vpc_id     = var.create_vpc ? module.vpc[0].output.vpc.id : "vpc-000fe2b5ddba6bb64"
-  tags       = var.tags
+  vpc_id     = module.vpc.output.vpc.id
 }
