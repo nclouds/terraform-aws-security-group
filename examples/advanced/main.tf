@@ -23,16 +23,15 @@ data "aws_iam_policy_document" "document" {
 }
 
 module "iam_policy" {
-  source = "git@github.com:nclouds/terraform-aws-iam-policy.git?ref=v0.1.4"
+  source = "git@github.com:nclouds/terraform-aws-iam-policy.git?ref=v0.1.7"
 
   rendered_policy = data.aws_iam_policy_document.document.json
   description     = "IAM Policy for VPC Flow Logs Cloudwatch"
   identifier      = "cw-flow-logs-access"
-  tags            = var.tags
 }
 
 module "flow_logs_role" {
-  source = "git@github.com:nclouds/terraform-aws-iam-role.git?ref=v0.2.2"
+  source = "git@github.com:nclouds/terraform-aws-iam-role.git?ref=v0.2.5"
 
   iam_policies_to_attach = [
     module.iam_policy.output.policy.arn
@@ -41,12 +40,10 @@ module "flow_logs_role" {
   aws_service_principal = "vpc-flow-logs.amazonaws.com"
   description           = "Example IAM Role"
   identifier            = "${var.identifier}-flow-logs"
-  tags                  = var.tags
 }
 
 # Create a VPC
 module "vpc" {
-  count        = var.create_vpc ? 1 : 0
   source       = "git@github.com:nclouds/terraform-aws-vpc.git?ref=v0.3.0"
   multi_nat_gw = false
   flow_log_settings = {
@@ -69,14 +66,18 @@ module "vpc" {
   }
   identifier = "${var.identifier}_vpc"
   region     = "us-east-1"
-  tags       = var.tags
+  tags = {
+    Terraform   = true
+    Environment = "dev"
+    Name        = "Example"
+  }
 }
 
 # Create a Security Group
 module "security_group" {
   source     = "../.."
   identifier = "${var.identifier}-sg"
-  vpc_id     = var.create_vpc ? module.vpc[0].output.vpc.id : "vpc-000fe2b5ddba6bb64"
+  vpc_id     = module.vpc.output.vpc.id
   ingress_rule_list = [
     {
       cidr_blocks = ["0.0.0.0/0"],
@@ -107,5 +108,4 @@ module "security_group" {
       to_port     = 80
     }
   ]
-  tags = var.tags
 }
