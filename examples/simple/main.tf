@@ -66,6 +66,11 @@ module "vpc" {
   }
   identifier = "${var.identifier}_vpc"
   region     = "us-east-1"
+  tags = {
+    Terraform   = true
+    Environment = "dev"
+    Name        = "Example"
+  }
 }
 
 # Create a Security Group
