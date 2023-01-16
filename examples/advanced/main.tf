@@ -15,6 +15,7 @@ locals {
   }
 }
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "document" {
   statement {
     actions   = local.policies["logs"]["actions"]
@@ -23,7 +24,7 @@ data "aws_iam_policy_document" "document" {
 }
 
 module "iam_policy" {
-  source = "git@github.com:nclouds/terraform-aws-iam-policy.git?ref=v0.1.7"
+  source = "github.com/nclouds/terraform-aws-iam-policy?ref=v0.1.7"
 
   rendered_policy = data.aws_iam_policy_document.document.json
   description     = "IAM Policy for VPC Flow Logs Cloudwatch"
@@ -31,7 +32,7 @@ module "iam_policy" {
 }
 
 module "flow_logs_role" {
-  source = "git@github.com:nclouds/terraform-aws-iam-role.git?ref=v0.2.5"
+  source = "github.com/nclouds/terraform-aws-iam-role?ref=v0.2.5"
 
   iam_policies_to_attach = [
     module.iam_policy.output.policy.arn
@@ -74,6 +75,8 @@ module "vpc" {
 }
 
 # Create a Security Group
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
 module "security_group" {
   source     = "../.."
   identifier = "${var.identifier}-sg"
