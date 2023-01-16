@@ -13,7 +13,7 @@ Terraform module to provision [`AWS VPC Security Group`](https://docs.aws.amazon
 Create a simple security group with default rules.
 ```hcl
     module "security_group" {
-        source     = "github.com/nclouds/terraform-aws-security-group?ref=v0.2.8"
+        source     = "github.com/nclouds/terraform-aws-security-group?ref=v0.2.9"
         identifier = "example-sg"
         vpc_id     = "vpc-xxxxxxxxxxxxx"
         tags       = {
