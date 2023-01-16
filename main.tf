@@ -53,6 +53,8 @@ resource "aws_security_group_rule" "self" {
   type              = "ingress"
 }
 
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
 resource "aws_security_group_rule" "default_egress_rules" {
   count = length(var.egress_rule_list)
 
