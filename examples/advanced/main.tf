@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "document" {
 }
 
 module "iam_policy" {
-  source = "github.com/nclouds/terraform-aws-iam-policy?ref=v0.1.7"
+  source = "github.com/nclouds/terraform-aws-iam-policy?ref=v0.1.11"
 
   rendered_policy = data.aws_iam_policy_document.document.json
   description     = "IAM Policy for VPC Flow Logs Cloudwatch"
@@ -32,15 +32,15 @@ module "iam_policy" {
 }
 
 module "flow_logs_role" {
-  source = "github.com/nclouds/terraform-aws-iam-role?ref=v0.2.5"
+  source = "github.com/nclouds/terraform-aws-iam-role?ref=v1.0.2"
 
   iam_policies_to_attach = [
     module.iam_policy.output.policy.arn
   ]
 
-  aws_service_principal = "vpc-flow-logs.amazonaws.com"
-  description           = "Example IAM Role"
-  identifier            = "${var.identifier}-flow-logs"
+  trusted_service_arns = ["vpc-flow-logs.amazonaws.com"]
+  description          = "Example IAM Role"
+  identifier           = "${var.identifier}-flow-logs"
 }
 
 # Create a VPC
